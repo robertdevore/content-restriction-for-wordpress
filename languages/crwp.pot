@@ -1,0 +1,115 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Content Restriction for WordPress®\n"
+"POT-Creation-Date: 2024-11-05 12:24-0500\n"
+"PO-Revision-Date: 2024-11-05 12:24-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"X-Generator: Poedit 3.2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: content-restriction-for-wordpress.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: content-restriction-for-wordpress.php:55
+#: content-restriction-for-wordpress.php:73
+msgid "Content Restriction Settings"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:56
+msgid "Content Restriction"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:96
+msgid "Content Restriction Options"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:103
+msgid "Restrict content by:"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:118
+msgid "Set access restrictions per post type or taxonomy term and user role."
+msgstr ""
+
+#: content-restriction-for-wordpress.php:138
+#: content-restriction-for-wordpress.php:185
+msgid "Select Post Type or Taxonomy Term"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:140
+#: content-restriction-for-wordpress.php:188
+msgid "Post Types"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:148
+#: content-restriction-for-wordpress.php:195
+msgid "Taxonomies"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:216
+msgid "Add Restriction"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:258
+#: content-restriction-for-wordpress.php:270
+#: content-restriction-for-wordpress.php:275
+msgid "This content is restricted. Please log in to view it."
+msgstr ""
+
+#: content-restriction-for-wordpress.php:371
+msgid "Restrict Content"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:398
+msgid "Restrict this content"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:402
+msgid "Minimum Role Required:"
+msgstr ""
+
+#: content-restriction-for-wordpress.php:460
+#: content-restriction-for-wordpress.php:473
+#: content-restriction-for-wordpress.php:479
+msgid "This content is restricted. Please log in to view."
+msgstr ""
+
+#: content-restriction-for-wordpress.php:509
+#: content-restriction-for-wordpress.php:521
+#: content-restriction-for-wordpress.php:526
+msgid "This content is restricted. Please visit the site and log in to view."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Content Restriction for WordPress®"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/robertdevore/content-restriction-for-wordpress/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Enables role-based content restriction by post type, taxonomy term, or "
+"individual post/page, redirecting unauthorized users to login when needed."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Robert DeVore"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://robertdevore.com/"
+msgstr ""
