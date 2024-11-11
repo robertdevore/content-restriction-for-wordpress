@@ -70,8 +70,14 @@ add_action( 'admin_menu', 'crwp_register_settings_page' );
 function crwp_render_settings_page() {
     ?>
     <div class="wrap">
-        <h1><?php esc_html_e( 'Content Restriction Settings', 'crwp' ); ?></h1>
-        <p><a href="https://robertdevore.com/content-restriction-for-wordpress-documentation/" target="_blank"><?php esc_html_e( 'Documentation', 'crwp' ) ?></a> &middot; <a href="https://robertdevore.com/contact/" target="_blank"><?php esc_html_e( 'Support', 'crwp' ) ?></a> &middot; <a href="https://robertdevore.com/" target="_blank"><?php esc_html_e( 'More Plugins', 'crwp' ) ?></a></p>
+        <h1><?php esc_html_e( 'Content Restriction Settings', 'crwp' ); ?>
+            <a id="crwp-support-btn" href="https://robertdevore.com/contact/" target="_blank" class="button button-alt" style="margin-left: 10px;">
+                <span class="dashicons dashicons-format-chat" style="vertical-align: middle;"></span> <?php esc_html_e( 'Support', 'benchpress' ); ?>
+            </a>
+            <a id="crwp-docs-btn" href="https://robertdevore.com/articles/content-restriction-for-wordpress/" target="_blank" class="button button-alt" style="margin-left: 5px;">
+                <span class="dashicons dashicons-media-document" style="vertical-align: middle;"></span> <?php esc_html_e( 'Documentation', 'benchpress' ); ?>
+            </a>
+        </h1>
         <form method="post" action="options.php">
             <?php
                 settings_fields( 'crwp_settings_group' );
@@ -97,11 +103,11 @@ function crwp_render_settings_page() {
  */
 function crwp_register_settings() {
     // Register the main settings.
-    register_setting( 'crwp_settings_group', 'crwp_restrictions', 'crwp_sanitize_restrictions' );
+    register_setting( 'crwp_settings_group', 'crwp_restrictions', [ 'crwp_sanitize_restrictions' ] );
 
     // Register new settings for REST API and RSS feed visibility.
-    register_setting( 'crwp_settings_group', 'crwp_hide_rest_content', 'absint' );
-    register_setting( 'crwp_settings_group', 'crwp_hide_feed_content', 'absint' );
+    register_setting( 'crwp_settings_group', 'crwp_hide_rest_content', [ 'absint' ] );
+    register_setting( 'crwp_settings_group', 'crwp_hide_feed_content', [ 'absint' ] );
 
     /**
      * Section: Content Restriction Options
@@ -336,6 +342,9 @@ function crwp_enqueue_admin_scripts( $hook ) {
 
         // Enqueue custom admin JS.
         wp_enqueue_script( 'crwp-admin-js', plugin_dir_url( __FILE__ ) . 'assets/js/crwp-admin.js', [ 'jquery', 'select2-js' ], CRWP_VERSION, true );
+        wp_localize_script( 'crwp-admin-js', 'crwp_admin', [
+            'nonce' => wp_create_nonce( 'crwp_ajax_nonce' ),
+        ] );
 
         // Enqueue custom admin CSS.
         wp_enqueue_style( 'crwp-admin-css', plugin_dir_url( __FILE__ ) . 'assets/css/crwp-admin.css', [], CRWP_VERSION );
@@ -695,3 +704,50 @@ function crwp_modify_feed_content( $content ) {
     return $content;
 }
 add_filter( 'the_content', 'crwp_modify_feed_content' );
+
+/**
+ * AJAX handler to fetch post types and taxonomy terms for Select2.
+ *
+ * @since 1.0.0
+ */
+function crwp_fetch_content_options() {
+    // Check for nonce security.
+    check_ajax_referer( 'crwp_ajax_nonce', 'nonce' );
+
+    $search = isset($_GET['q']) ? sanitize_text_field($_GET['q']) : '';
+
+    $results = [];
+
+    // Fetch post types
+    $post_types = get_post_types([ 'public' => true ], 'objects');
+    foreach ($post_types as $post_type) {
+        if (stripos($post_type->label, $search) !== false) {
+            $results[] = [
+                'id' => 'post_type:' . $post_type->name,
+                'text' => $post_type->label,
+            ];
+        }
+    }
+
+    // Fetch taxonomy terms
+    $taxonomies = get_taxonomies([ 'public' => true ], 'objects');
+    foreach ($taxonomies as $taxonomy) {
+        $terms = get_terms([
+            'taxonomy' => $taxonomy->name,
+            'hide_empty' => false,
+            'search' => $search,
+        ]);
+        if (!is_wp_error($terms)) {
+            foreach ($terms as $term) {
+                $results[] = [
+                    'id' => 'taxonomy:' . $taxonomy->name . ':' . $term->term_id,
+                    'text' => $taxonomy->label . ' - ' . $term->name,
+                ];
+            }
+        }
+    }
+
+    // Return the result as JSON
+    wp_send_json($results);
+}
+add_action('wp_ajax_crwp_fetch_content_options', 'crwp_fetch_content_options');

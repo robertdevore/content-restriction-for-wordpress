@@ -1,7 +1,34 @@
 .crwp-section.crwp-restriction-options {
     background-color: #fff;
     padding: 20px;
-    margin-bottom: 20px;
+    margin: 20px 0;
     border: 1px solid #ccd0d4;
     box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+#crwp-support-btn,
+#crwp-docs-btn {
+    line-height: 22px;
+    float: right;
+    margin-left: 12px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    gap: 6;
+}
+
+#crwp_repeater_container .crwp_repeater_item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#crwp_repeater_container .crwp_repeater_item select,
+#crwp_repeater_container .crwp_repeater_item button {
+    flex-grow: 1;
 }
