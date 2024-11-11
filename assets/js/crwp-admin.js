@@ -4,7 +4,7 @@ jQuery(function ($) {
         ajax: {
             url: ajaxurl,
             dataType: 'json',
-            delay: 250, // Delay to reduce server load
+            delay: 250,
             data: function (params) {
                 return {
                     q: params.term, // Search term

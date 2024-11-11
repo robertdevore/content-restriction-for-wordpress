@@ -78,7 +78,6 @@ You can set restrictions globally for post types and taxonomy terms or individua
 You can customize the restriction messages using filters in your theme's `functions.php` file or a custom plugin.
 
 - **Content Message**:
-    
     ```
     add_filter( 'crwp_restricted_content_message', function( $message ) {
         return '<p>You must be a premium member to view this content.</p>';
