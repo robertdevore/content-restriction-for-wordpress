@@ -446,14 +446,30 @@ function crwp_user_has_minimum_role( $minimum_role ) {
         return false;
     }
 
-    // Get the user role data.
-    $user            = wp_get_current_user();
-    $roles_hierarchy = array_keys( wp_roles()->get_names() );
+    // Get the current user and their roles.
+    $user = wp_get_current_user();
 
-    // Compare user's highest role with the minimum required role.
+    // Retrieve all roles in a hierarchical order, from lowest to highest, and flip for indexing.
+    $roles_hierarchy = array_keys( wp_roles()->get_names() );
+    $roles_hierarchy = array_flip( array_reverse( $roles_hierarchy ) );
+
+    // Ensure the minimum role is valid in the hierarchy.
+    if ( ! isset( $roles_hierarchy[ $minimum_role ] ) ) {
+        error_log( 'Minimum role is not in the defined roles hierarchy.' );
+        return false;
+    }
+
+    // Get the required level for the minimum role.
+    $required_level = $roles_hierarchy[ $minimum_role ];
+
+    // Check each of the user’s roles to see if any meet or exceed the required level.
     foreach ( $user->roles as $role ) {
-        if ( array_search( $role, $roles_hierarchy ) >= array_search( $minimum_role, $roles_hierarchy ) ) {
-            return true;
+        if ( isset( $roles_hierarchy[ $role ] ) ) {
+            $user_role_level = $roles_hierarchy[ $role ];
+
+            if ( $user_role_level >= $required_level ) {
+                return true;
+            }
         }
     }
 
