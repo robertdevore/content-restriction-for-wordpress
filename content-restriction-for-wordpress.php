@@ -72,10 +72,10 @@ function crwp_render_settings_page() {
     <div class="wrap">
         <h1><?php esc_html_e( 'Content Restriction Settings', 'crwp' ); ?>
             <a id="crwp-support-btn" href="https://robertdevore.com/contact/" target="_blank" class="button button-alt" style="margin-left: 10px;">
-                <span class="dashicons dashicons-format-chat" style="vertical-align: middle;"></span> <?php esc_html_e( 'Support', 'benchpress' ); ?>
+                <span class="dashicons dashicons-format-chat" style="vertical-align: middle;"></span> <?php esc_html_e( 'Support', 'crwp' ); ?>
             </a>
             <a id="crwp-docs-btn" href="https://robertdevore.com/articles/content-restriction-for-wordpress/" target="_blank" class="button button-alt" style="margin-left: 5px;">
-                <span class="dashicons dashicons-media-document" style="vertical-align: middle;"></span> <?php esc_html_e( 'Documentation', 'benchpress' ); ?>
+                <span class="dashicons dashicons-media-document" style="vertical-align: middle;"></span> <?php esc_html_e( 'Documentation', 'crwp' ); ?>
             </a>
         </h1>
         <form method="post" action="options.php">
