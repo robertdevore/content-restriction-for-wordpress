@@ -464,7 +464,7 @@ function crwp_user_has_minimum_role( $minimum_role ) {
 
     // Ensure the minimum role is valid in the hierarchy.
     if ( ! isset( $roles_hierarchy[ $minimum_role ] ) ) {
-        error_log( 'Minimum role is not in the defined roles hierarchy.' );
+        error_log( '[Content Restriction for WordPress®] Minimum role is not in the defined roles hierarchy.' );
         return false;
     }
 
