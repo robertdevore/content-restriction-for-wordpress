@@ -39,9 +39,16 @@ $myUpdateChecker = PucFactory::buildUpdateChecker(
 // Set the branch that contains the stable release.
 $myUpdateChecker->setBranch( 'main' );
 
-/**
- * Current plugin version.
- */
+// Check if Composer's autoloader is already registered globally.
+if ( ! class_exists( 'RobertDevore\WPComCheck\WPComPluginHandler' ) ) {
+    require_once __DIR__ . '/vendor/autoload.php';
+}
+
+use RobertDevore\WPComCheck\WPComPluginHandler;
+
+new WPComPluginHandler( plugin_basename( __FILE__ ), 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' );
+
+// Current plugin version.
 define( 'CRWP_VERSION', '1.0.0' );
 
 /**
@@ -98,7 +105,7 @@ function crwp_render_settings_page() {
 /**
  * Register settings, sections, and fields with a repeater.
  *
- * @since 1.0.0
+ * @since  1.0.0
  * @return void
  */
 function crwp_register_settings() {
@@ -158,7 +165,7 @@ add_action( 'admin_init', 'crwp_register_settings' );
 /**
  * Callback for the content restriction options section.
  *
- * @since 1.1.0
+ * @since  1.0.0
  * @return void
  */
 function crwp_restriction_options_section_callback() {
@@ -168,7 +175,7 @@ function crwp_restriction_options_section_callback() {
 /**
  * Callback for the content visibility options section.
  *
- * @since 1.1.0
+ * @since  1.0.0
  * @return void
  */
 function crwp_visibility_options_section_callback() {
@@ -180,6 +187,7 @@ function crwp_visibility_options_section_callback() {
  * Sanitize the restrictions option.
  *
  * @param array $input The input value.
+ * 
  * @return array The sanitized input.
  */
 function crwp_sanitize_restrictions( $input ) {
@@ -368,7 +376,7 @@ function crwp_restrict_content_based_on_settings( $content ) {
 
         // Check for individual post-level restriction and role.
         $individual_restriction = get_post_meta( $post->ID, '_crwp_restrict_content', true );
-        $individual_role = get_post_meta( $post->ID, '_crwp_restricted_role', true ) ?: 'subscriber';
+        $individual_role        = get_post_meta( $post->ID, '_crwp_restricted_role', true ) ?: 'subscriber';
         
         if ( $individual_restriction && ( ! is_user_logged_in() || ! crwp_user_has_minimum_role( $individual_role ) ) ) {
             return '<p>' . esc_html__( 'This content is restricted. Please log in to view it.', 'crwp' ) . '</p>';
@@ -377,11 +385,11 @@ function crwp_restrict_content_based_on_settings( $content ) {
         // Process global restrictions if no individual restriction.
         foreach ( $restrictions as $restriction ) {
             $restricted_role = $restriction['role'];
-            $content_type = explode( ':', $restriction['content_type'] );
+            $content_type    = explode( ':', $restriction['content_type'] );
 
             // Check if user meets role requirement for the post type or taxonomy restrictions.
             if ( ! is_user_logged_in() || ! crwp_user_has_minimum_role( $restricted_role ) ) {
-                // Handle post type restriction
+                // Handle post type restriction.
                 if ( $content_type[0] === 'post_type' && $post->post_type === $content_type[1] ) {
                     return '<p>' . esc_html__( 'This content is restricted. Please log in to view it.', 'crwp' ) . '</p>';
                 }
@@ -708,156 +716,47 @@ add_filter( 'the_content', 'crwp_modify_feed_content' );
 /**
  * AJAX handler to fetch post types and taxonomy terms for Select2.
  *
- * @since 1.0.0
+ * @since  1.0.0
+ * @return void
  */
 function crwp_fetch_content_options() {
     // Check for nonce security.
     check_ajax_referer( 'crwp_ajax_nonce', 'nonce' );
 
-    $search = isset($_GET['q']) ? sanitize_text_field($_GET['q']) : '';
+    $search = isset( $_GET['q'] ) ? sanitize_text_field( $_GET['q'] ) : '';
 
     $results = [];
 
     // Fetch post types
-    $post_types = get_post_types([ 'public' => true ], 'objects');
-    foreach ($post_types as $post_type) {
-        if (stripos($post_type->label, $search) !== false) {
+    $post_types = get_post_types( [ 'public' => true ], 'objects' );
+    foreach ( $post_types as $post_type ) {
+        if ( stripos( $post_type->label, $search ) !== false ) {
             $results[] = [
-                'id' => 'post_type:' . $post_type->name,
+                'id'   => 'post_type:' . $post_type->name,
                 'text' => $post_type->label,
             ];
         }
     }
 
     // Fetch taxonomy terms
-    $taxonomies = get_taxonomies([ 'public' => true ], 'objects');
-    foreach ($taxonomies as $taxonomy) {
-        $terms = get_terms([
-            'taxonomy' => $taxonomy->name,
+    $taxonomies = get_taxonomies( [ 'public' => true ], 'objects' );
+    foreach ( $taxonomies as $taxonomy ) {
+        $terms = get_terms( [
+            'taxonomy'   => $taxonomy->name,
             'hide_empty' => false,
-            'search' => $search,
-        ]);
-        if (!is_wp_error($terms)) {
-            foreach ($terms as $term) {
+            'search'     => $search,
+        ] );
+        if ( ! is_wp_error( $terms ) ) {
+            foreach ( $terms as $term ) {
                 $results[] = [
-                    'id' => 'taxonomy:' . $taxonomy->name . ':' . $term->term_id,
+                    'id'   => 'taxonomy:' . $taxonomy->name . ':' . $term->term_id,
                     'text' => $taxonomy->label . ' - ' . $term->name,
                 ];
             }
         }
     }
 
-    // Return the result as JSON
-    wp_send_json($results);
+    // Return the result as JSON.
+    wp_send_json( $results );
 }
-add_action('wp_ajax_crwp_fetch_content_options', 'crwp_fetch_content_options');
-
-/**
- * Helper function to handle WordPress.com environment checks.
- *
- * @param string $plugin_slug     The plugin slug.
- * @param string $learn_more_link The link to more information.
- * 
- * @since  1.1.0
- * @return bool
- */
-function wp_com_plugin_check( $plugin_slug, $learn_more_link ) {
-    // Check if the site is hosted on WordPress.com.
-    if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
-        // Ensure the deactivate_plugins function is available.
-        if ( ! function_exists( 'deactivate_plugins' ) ) {
-            require_once ABSPATH . 'wp-admin/includes/plugin.php';
-        }
-
-        // Deactivate the plugin if in the admin area.
-        if ( is_admin() ) {
-            deactivate_plugins( $plugin_slug );
-
-            // Add a deactivation notice for later display.
-            add_option( 'wpcom_deactivation_notice', $learn_more_link );
-
-            // Prevent further execution.
-            return true;
-        }
-    }
-
-    return false;
-}
-
-/**
- * Auto-deactivate the plugin if running in an unsupported environment.
- *
- * @since  1.1.0
- * @return void
- */
-function wpcom_auto_deactivation() {
-    if ( wp_com_plugin_check( plugin_basename( __FILE__ ), 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' ) ) {
-        return; // Stop execution if deactivated.
-    }
-}
-add_action( 'plugins_loaded', 'wpcom_auto_deactivation' );
-
-/**
- * Display an admin notice if the plugin was deactivated due to hosting restrictions.
- *
- * @since  1.1.0
- * @return void
- */
-function wpcom_admin_notice() {
-    $notice_link = get_option( 'wpcom_deactivation_notice' );
-    if ( $notice_link ) {
-        ?>
-        <div class="notice notice-error">
-            <p>
-                <?php
-                echo wp_kses_post(
-                    sprintf(
-                        __( 'My Plugin has been deactivated because it cannot be used on WordPress.com-hosted websites. %s', 'crwp' ),
-                        '<a href="' . esc_url( $notice_link ) . '" target="_blank" rel="noopener">' . __( 'Learn more', 'crwp' ) . '</a>'
-                    )
-                );
-                ?>
-            </p>
-        </div>
-        <?php
-        delete_option( 'wpcom_deactivation_notice' );
-    }
-}
-add_action( 'admin_notices', 'wpcom_admin_notice' );
-
-/**
- * Prevent plugin activation on WordPress.com-hosted sites.
- *
- * @since  1.1.0
- * @return void
- */
-function wpcom_activation_check() {
-    if ( wp_com_plugin_check( plugin_basename( __FILE__ ), 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' ) ) {
-        // Display an error message and stop activation.
-        wp_die(
-            wp_kses_post(
-                sprintf(
-                    '<h1>%s</h1><p>%s</p><p><a href="%s" target="_blank" rel="noopener">%s</a></p>',
-                    __( 'Plugin Activation Blocked', 'crwp' ),
-                    __( 'This plugin cannot be activated on WordPress.com-hosted websites. It is restricted due to concerns about WordPress.com policies impacting the community.', 'crwp' ),
-                    esc_url( 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' ),
-                    __( 'Learn more', 'crwp' )
-                )
-            ),
-            esc_html__( 'Plugin Activation Blocked', 'crwp' ),
-            [ 'back_link' => true ]
-        );
-    }
-}
-register_activation_hook( __FILE__, 'wpcom_activation_check' );
-
-/**
- * Add a deactivation flag when the plugin is deactivated.
- *
- * @since  1.1.0
- * @return void
- */
-function wpcom_deactivation_flag() {
-    add_option( 'wpcom_deactivation_notice', 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' );
-}
-register_deactivation_hook( __FILE__, 'wpcom_deactivation_flag' );
+add_action( 'wp_ajax_crwp_fetch_content_options', 'crwp_fetch_content_options' );
