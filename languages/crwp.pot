@@ -2,15 +2,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Content Restriction for WordPress®\n"
-"POT-Creation-Date: 2024-11-11 16:21-0500\n"
-"PO-Revision-Date: 2024-11-11 16:21-0500\n"
+"POT-Creation-Date: 2025-02-12 23:59-0500\n"
+"PO-Revision-Date: 2025-02-12 23:59-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: content-restriction-for-wordpress.php\n"
@@ -22,110 +22,106 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: content-restriction-for-wordpress.php:55
-#: content-restriction-for-wordpress.php:73
+#: content-restriction-for-wordpress.php:92
+#: content-restriction-for-wordpress.php:104
+#: content-restriction-for-wordpress.php:109
+msgid "This content is restricted. Please log in to view it."
+msgstr ""
+
+#: content-restriction-for-wordpress.php:228
+#: content-restriction-for-wordpress.php:259
+msgid "Content not found."
+msgstr ""
+
+#: content-restriction-for-wordpress.php:231
+#: content-restriction-for-wordpress.php:262
+msgid "This content is restricted. Please log in to view."
+msgstr ""
+
+#: content-restriction-for-wordpress.php:299
+#: content-restriction-for-wordpress.php:328
+msgid "This content is restricted. Please visit the site and log in to view."
+msgstr ""
+
+#: includes/admin-settings.php:16 includes/admin-settings.php:34
 msgid "Content Restriction Settings"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:56
+#: includes/admin-settings.php:17
 msgid "Content Restriction"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:75
+#: includes/admin-settings.php:36
 msgid "Support"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:78
+#: includes/admin-settings.php:39
 msgid "Documentation"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:117
+#: includes/admin-settings.php:78
 msgid "Content Restriction Options"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:124
+#: includes/admin-settings.php:85
 msgid "Restrict content by:"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:135
+#: includes/admin-settings.php:96
 msgid "Content Visibility Options"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:142
+#: includes/admin-settings.php:103
 msgid "Hide Restricted Content from REST API:"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:150
+#: includes/admin-settings.php:111
 msgid "Hide Restricted Content from RSS Feed:"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:165
+#: includes/admin-settings.php:126
 msgid "Set access restrictions per post type or taxonomy term and user role."
 msgstr ""
 
-#: content-restriction-for-wordpress.php:176
+#: includes/admin-settings.php:137
 msgid ""
 "Configure how restricted content is handled in the REST API and RSS feeds."
 msgstr ""
 
-#: content-restriction-for-wordpress.php:210
+#: includes/admin-settings.php:172
 msgid "Completely hide restricted content from REST API responses."
 msgstr ""
 
-#: content-restriction-for-wordpress.php:226
+#: includes/admin-settings.php:188
 msgid "Completely hide restricted content from RSS feeds."
 msgstr ""
 
-#: content-restriction-for-wordpress.php:248
-#: content-restriction-for-wordpress.php:295
+#: includes/admin-settings.php:210 includes/admin-settings.php:257
 msgid "Select Post Type or Taxonomy Term"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:250
-#: content-restriction-for-wordpress.php:298
+#: includes/admin-settings.php:212 includes/admin-settings.php:260
 msgid "Post Types"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:258
-#: content-restriction-for-wordpress.php:305
+#: includes/admin-settings.php:220 includes/admin-settings.php:267
 msgid "Taxonomies"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:326
+#: includes/admin-settings.php:288
 msgid "Add Restriction"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:374
-#: content-restriction-for-wordpress.php:386
-#: content-restriction-for-wordpress.php:391
-msgid "This content is restricted. Please log in to view it."
-msgstr ""
-
-#: content-restriction-for-wordpress.php:503
+#: includes/metabox.php:23
 msgid "Restrict Content"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:530
+#: includes/metabox.php:50
 msgid "Restrict this content"
 msgstr ""
 
-#: content-restriction-for-wordpress.php:534
+#: includes/metabox.php:54
 msgid "Minimum Role Required:"
-msgstr ""
-
-#: content-restriction-for-wordpress.php:596
-#: content-restriction-for-wordpress.php:627
-msgid "Content not found."
-msgstr ""
-
-#: content-restriction-for-wordpress.php:599
-#: content-restriction-for-wordpress.php:630
-msgid "This content is restricted. Please log in to view."
-msgstr ""
-
-#: content-restriction-for-wordpress.php:667
-#: content-restriction-for-wordpress.php:696
-msgid "This content is restricted. Please visit the site and log in to view."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
