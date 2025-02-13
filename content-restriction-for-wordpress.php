@@ -12,7 +12,7 @@
   * Plugin Name: Content Restriction for WordPress®
   * Description: Enables role-based content restriction by post type, taxonomy term, or individual post/page, redirecting unauthorized users to login when needed.
   * Plugin URI:  https://github.com/robertdevore/content-restriction-for-wordpress/
-  * Version:     1.0.0
+  * Version:     1.1.0
   * Author:      Robert DeVore
   * Author URI:  https://robertdevore.com/
   * License:     GPL-2.0+
@@ -53,7 +53,7 @@ use RobertDevore\WPComCheck\WPComPluginHandler;
 new WPComPluginHandler( plugin_basename( __FILE__ ), 'https://robertdevore.com/why-this-plugin-doesnt-support-wordpress-com-hosting/' );
 
 // Current plugin version.
-define( 'CRWP_VERSION', '1.0.0' );
+define( 'CRWP_VERSION', '1.1.0' );
 
 /**
  * Load plugin text domain for translations
