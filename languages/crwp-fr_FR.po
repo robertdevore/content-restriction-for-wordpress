@@ -1,0 +1,156 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Content Restriction for WordPress®\n"
+"POT-Creation-Date: 2025-02-13 00:02-0500\n"
+"PO-Revision-Date: 2025-02-13 00:02-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: content-restriction-for-wordpress.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: content-restriction-for-wordpress.php:92
+#: content-restriction-for-wordpress.php:104
+#: content-restriction-for-wordpress.php:109
+msgid "This content is restricted. Please log in to view it."
+msgstr "Ce contenu est restreint. Veuillez vous connecter pour le consulter."
+
+#: content-restriction-for-wordpress.php:228
+#: content-restriction-for-wordpress.php:259
+msgid "Content not found."
+msgstr "Aucun résultat trouvé."
+
+#: content-restriction-for-wordpress.php:231
+#: content-restriction-for-wordpress.php:262
+msgid "This content is restricted. Please log in to view."
+msgstr "Ce contenu est restreint. Veuillez vous connecter pour le consulter."
+
+#: content-restriction-for-wordpress.php:299
+#: content-restriction-for-wordpress.php:328
+msgid "This content is restricted. Please visit the site and log in to view."
+msgstr ""
+"Ce contenu est restreint. Veuillez vous rendre sur le site et vous "
+"connecter pour le consulter."
+
+#: includes/admin-settings.php:16 includes/admin-settings.php:34
+msgid "Content Restriction Settings"
+msgstr "Paramètres de restriction de contenu"
+
+#: includes/admin-settings.php:17
+msgid "Content Restriction"
+msgstr "Restriction de contenu"
+
+#: includes/admin-settings.php:36
+msgid "Support"
+msgstr "Support"
+
+#: includes/admin-settings.php:39
+msgid "Documentation"
+msgstr "Documentation"
+
+#: includes/admin-settings.php:78
+msgid "Content Restriction Options"
+msgstr "Options de restriction du contenu"
+
+#: includes/admin-settings.php:85
+msgid "Restrict content by:"
+msgstr "Restreindre le contenu par :"
+
+#: includes/admin-settings.php:96
+msgid "Content Visibility Options"
+msgstr "Options de visibilité du contenu"
+
+#: includes/admin-settings.php:103
+msgid "Hide Restricted Content from REST API:"
+msgstr "Masquer le contenu restreint de l'API REST :"
+
+#: includes/admin-settings.php:111
+msgid "Hide Restricted Content from RSS Feed:"
+msgstr "Masquer le contenu restreint du flux RSS :"
+
+#: includes/admin-settings.php:126
+msgid "Set access restrictions per post type or taxonomy term and user role."
+msgstr ""
+"Définir des restrictions d'accès par type de message ou terme de taxonomie "
+"et par rôle d'utilisateur."
+
+#: includes/admin-settings.php:137
+msgid ""
+"Configure how restricted content is handled in the REST API and RSS feeds."
+msgstr ""
+"Configurer la gestion des contenus restreints dans l'API REST et les flux "
+"RSS."
+
+#: includes/admin-settings.php:172
+msgid "Completely hide restricted content from REST API responses."
+msgstr ""
+"Masquer complètement le contenu restreint des réponses de l'API REST."
+
+#: includes/admin-settings.php:188
+msgid "Completely hide restricted content from RSS feeds."
+msgstr "Masquer complètement le contenu restreint des flux RSS."
+
+#: includes/admin-settings.php:210 includes/admin-settings.php:257
+msgid "Select Post Type or Taxonomy Term"
+msgstr "Sélectionnez le type de message ou le terme de taxonomie"
+
+#: includes/admin-settings.php:212 includes/admin-settings.php:260
+msgid "Post Types"
+msgstr "Types d’article"
+
+#: includes/admin-settings.php:220 includes/admin-settings.php:267
+msgid "Taxonomies"
+msgstr "Taxonomies"
+
+#: includes/admin-settings.php:288
+msgid "Add Restriction"
+msgstr "Ajouter une restriction"
+
+#: includes/metabox.php:23
+msgid "Restrict Content"
+msgstr "Restreindre le contenu"
+
+#: includes/metabox.php:50
+msgid "Restrict this content"
+msgstr "Restriendre l'accès à ce contenu"
+
+#: includes/metabox.php:54
+msgid "Minimum Role Required:"
+msgstr "Rôle minimum requis :"
+
+#. Plugin Name of the plugin/theme
+msgid "Content Restriction for WordPress®"
+msgstr "Restriction de contenu pour WordPress®"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/robertdevore/content-restriction-for-wordpress/"
+msgstr "https://github.com/robertdevore/content-restriction-for-wordpress/"
+
+#. Description of the plugin/theme
+msgid ""
+"Enables role-based content restriction by post type, taxonomy term, or "
+"individual post/page, redirecting unauthorized users to login when needed."
+msgstr ""
+"Permet de restreindre le contenu en fonction des rôles par type de "
+"message, terme de taxonomie ou message/page individuel, en redirigeant les "
+"utilisateurs non autorisés vers la connexion si nécessaire."
+
+#. Author of the plugin/theme
+msgid "Robert DeVore"
+msgstr "Robert DeVore"
+
+#. Author URI of the plugin/theme
+msgid "https://robertdevore.com/"
+msgstr "https://robertdevore.com/"
